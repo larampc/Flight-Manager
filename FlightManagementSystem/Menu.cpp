@@ -27,8 +27,38 @@ void Menu::run() {
         invalid();
         cin >> option;
     }
-//    switch (option[0]) {
-//        case '1':
-//            make_flight_request();
-//    }
+    switch (option[0]) {
+        case '1':
+            makeFlightRequest();
+        case '3': {
+            settings();
+            break;
+        }
+    }
+}
+
+void Menu::makeFlightRequest() {
+
+}
+
+void Menu::settings() {
+    string option;
+    Color_Print("cyan", "1- ");
+    if (color_mode) Color_Print("yellow", "Disable");
+    else Color_Print("yellow", "Enable");
+    Color_Print("white", " Color Mode\t");
+    Color_Print("cyan", "2- ");
+    Color_Print("red", "Cancel\n");
+
+    cin >> option;
+    while(option != "1" && option != "2") {
+        invalid();
+        cin >> option;
+    }
+    if (option == "1") {
+        color_mode = !color_mode;
+        if (color_mode) Color_Print("cyan", "Color mode enabled\n");
+        else Color_Print("cyan", "Color mode disabled\n");
+    }
+    run();
 }

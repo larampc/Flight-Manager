@@ -8,6 +8,8 @@ private:
     FlightManager flightManager;
 public:
     void run();
+    void makeFlightRequest();
+    void settings();
 };
 
 

@@ -89,14 +89,10 @@ int FlightManager::countFlightsFromAirport(std::string airport) {
 int FlightManager::countAirlinesFromAirport(std::string airport) {
     Vertex<Airport>* airportVertex = flights.findVertex(airports.at(airport));
     unordered_set<std::string> airline;
-    int count = 0;
     for(Edge<Airport> e: airportVertex->getAdj()) {
-        if (!airline.count(e.getWeight())) {
-            airline.insert(e.getWeight());
-            count++;
-        }
+        airline.insert(e.getWeight());
     }
-    return count;
+    return airline.size();
 }
 
 int FlightManager::countFlightsPerAirline(std::string code) const {
@@ -131,14 +127,10 @@ int FlightManager::countFlightsPerCity(std::string city) const {
 int FlightManager::countCountriesFromAirport(std::string airport) {
     Vertex<Airport>* airportVertex = flights.findVertex(airports.at(airport));
     unordered_set<std::string> countries;
-    int count = 0;
     for(Edge<Airport> e: airportVertex->getAdj()) {
-        if (!countries.count(e.getDest()->getInfo().getCountry())) {
-            countries.insert(e.getDest()->getInfo().getCountry());
-            count++;
-        }
+        countries.insert(e.getDest()->getInfo().getCountry());
     }
-    return count;
+    return countries.size();
 }
 
 int FlightManager::countAirports() {
@@ -154,43 +146,31 @@ int FlightManager::countFlights() {
 
 int FlightManager::countCountriesFromCity(std::string city) {
     unordered_set<std::string> countries;
-    int count = 0;
     for (Airport* air: cityAirports.at(city)) {
         Vertex<Airport>* airportVertex = flights.findVertex(*air);
         for(Edge<Airport> e: airportVertex->getAdj()) {
-            if (!countries.count(e.getDest()->getInfo().getCountry())) {
-                countries.insert(e.getDest()->getInfo().getCountry());
-                count++;
-            }
+            countries.insert(e.getDest()->getInfo().getCountry());
         }
     }
-    return count;
+    return countries.size();
 }
 
 int FlightManager::countAirportsFromAirport(std::string airport) {
     Vertex<Airport>* airportVertex = flights.findVertex(airports.at(airport));
     unordered_set<std::string> codes;
-    int count = 0;
     for (Edge<Airport> e: airportVertex->getAdj()) {
-        if (!codes.count(e.getDest()->getInfo().getCode())) {
-            codes.insert(e.getDest()->getInfo().getCode());
-            count++;
-        }
+        codes.insert(e.getDest()->getInfo().getCode());
     }
-    return count;
+    return codes.size();
 }
 
 int FlightManager::countCitiesFromAirport(std::string airport) {
     Vertex<Airport>* airportVertex = flights.findVertex(airports.at(airport));
     unordered_set<std::string> cities;
-    int count = 0;
     for (Edge<Airport> e: airportVertex->getAdj()) {
-        if (!cities.count(e.getDest()->getInfo().getCity())) {
-            cities.insert(e.getDest()->getInfo().getCity());
-            count++;
-        }
+        cities.insert(e.getDest()->getInfo().getCity());
     }
-    return count;
+    return cities.size();
 }
 
 int FlightManager::countAirportsKStops(std::string airport, int k) {
