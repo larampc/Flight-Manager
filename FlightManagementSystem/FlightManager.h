@@ -21,7 +21,18 @@ public:
     Airport getAirport(std::string code);
     std::unordered_map<std::string, Airline> getAirlines();
     std::unordered_map<std::string, Airport> getAirports();
-
+    int countFlightsPerAirline(std::string code) const;
+    int countFlightsPerCity(std::string city) const;
+    int countAirports();
+    int countFlights();
+    int countFlightsFromAirport(std::string airport);
+    int countAirlinesFromAirport(std::string airport);
+    int countCountriesFromAirport(std::string airport);
+    int countCountriesFromCity(std::string city);
+    int countAirportsFromAirport(std::string airport);
+    int countCitiesFromAirport(std::string airport);
+    int countAirportsKStops(std::string airport, int k);
+    int minDistanceAirports(std::string airportStart, std::string airportEnd);
 };
 
 
