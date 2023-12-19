@@ -3,3 +3,7 @@
 //
 
 #include "FlightManager.h"
+
+void FlightManager::addAirport(const Airport& airport) {
+    flights.addVertex(airport);
+}

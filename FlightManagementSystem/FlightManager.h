@@ -3,10 +3,14 @@
 
 #include "Airport.h"
 #include "Airport.h"
+#include "Graph.h"
 
 class FlightManager {
 private:
-
+    Graph<Airport> flights;
+public:
+    void addAirport(const Airport& airport);
+//    void addFlight(const Airport source, const Airport dest, )
 };
 
 

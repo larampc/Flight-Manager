@@ -57,13 +57,13 @@ public:
 template <class T>
 class Edge {
     Vertex<T> * dest;      // destination vertex
-    double weight;         // edge weight
+    std::string weight;         // edge weight
 public:
-    Edge(Vertex<T> *d, double w);
+    Edge(Vertex<T> *d, std::string w);
     Vertex<T> *getDest() const;
     void setDest(Vertex<T> *dest);
-    double getWeight() const;
-    void setWeight(double weight);
+    std::string getWeight() const;
+    void setWeight(std::string weight);
     friend class Graph<T>;
     friend class Vertex<T>;
 };
@@ -98,7 +98,7 @@ template <class T>
 Vertex<T>::Vertex(T in): info(in) {}
 
 template <class T>
-Edge<T>::Edge(Vertex<T> *d, double w): dest(d), weight(w) {}
+Edge<T>::Edge(Vertex<T> *d, string w): dest(d), weight(w) {}
 
 
 template <class T>
@@ -142,12 +142,12 @@ void Edge<T>::setDest(Vertex<T> *d) {
 }
 
 template<class T>
-double Edge<T>::getWeight() const {
+std::string Edge<T>::getWeight() const {
     return weight;
 }
 
 template<class T>
-void Edge<T>::setWeight(double weight) {
+void Edge<T>::setWeight(std::string weight) {
     Edge::weight = weight;
 }
 
@@ -157,7 +157,7 @@ void Edge<T>::setWeight(double weight) {
 template <class T>
 Vertex<T> * Graph<T>::findVertex(const T &in) const {
     for (auto v : vertexSet)
-        if (v->info == in)
+        if (static_cast<const Airport>(v->info) == in)
             return v;
     return NULL;
 }

@@ -43,3 +43,7 @@ double Airport::getDistance(double lat, double lon) {
     double c = 2 * asin(sqrt(a));
     return rad * c;
 }
+
+bool Airport::operator==(const Airport &airport) {
+    return airport.code == code;
+}

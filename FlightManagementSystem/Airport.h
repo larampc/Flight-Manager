@@ -21,6 +21,7 @@ public:
     double getLatitude() const;
     double getLongitude() const;
     double getDistance(double lat, double lon);
+    bool operator==(const Airport& airport);
 };
 
 #endif //AEDPROJ2_AIRPORT_H
