@@ -15,3 +15,8 @@ std::string Airline::getCallSign() const {
 std::string Airline::getCountry() const {
     return country;
 }
+
+std::ostream &operator<<(std::ostream &os, Airline &airline) {
+    os << airline.code + " " + airline.name + " " + airline.callSign + " " + airline.country + "\n";
+    return os;
+}
