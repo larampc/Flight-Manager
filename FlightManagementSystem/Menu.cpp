@@ -1,11 +1,13 @@
 #include "Menu.h"
 #include <iostream>
 #include <limits>
+#include "color_print.h"
 using namespace std;
+extern bool color_mode;
 
 void invalid(){
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    cout << "Invalid Input, please try again";
+    Color_Print("red", "Invalid Input, please try again\n");
 }
 void Menu::run() {
     Color_Print("blue", "-----------------------------------\n");
@@ -21,7 +23,7 @@ void Menu::run() {
     Color_Print("red", "Quit Manager");
     Color_Print("cyan", " - press 4\n");
     string option; cin >> option;
-    while(option != "1" && option != "2") {
+    while(option != "1" && option != "2" && option != "3" && option != "4") {
         invalid();
         cin >> option;
     }

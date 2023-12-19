@@ -13,4 +13,6 @@ add_executable(AEDproj2 main.cpp
         FlightManagementSystem/FlightManager.h
         FlightManagementSystem/Menu.cpp
         FlightManagementSystem/Menu.h
+        FlightManagementSystem/color_print.cpp
+        FlightManagementSystem/color_print.h
 )
