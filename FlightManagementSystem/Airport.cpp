@@ -44,6 +44,6 @@ double Airport::getDistance(double lat, double lon) {
     return rad * c;
 }
 
-bool Airport::operator==(const Airport &airport) {
+bool Airport::operator==(const Airport &airport) const {
     return airport.code == code;
 }

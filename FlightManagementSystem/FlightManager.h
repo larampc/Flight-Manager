@@ -10,7 +10,7 @@ private:
     Graph<Airport> flights;
 public:
     void addAirport(const Airport& airport);
-//    void addFlight(const Airport source, const Airport dest, )
+    void addFlight(const Airport& source, const Airport& dest, std::string& airline);
 };
 
 
