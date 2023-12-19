@@ -16,6 +16,7 @@ public:
     std::string getName() const;
     std::string getCallSign() const;
     std::string getCountry() const;
+    friend std::ostream & operator << (std::ostream &os, Airline &p);
 };
 
 

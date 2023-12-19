@@ -22,6 +22,7 @@ public:
     double getLongitude() const;
     double getDistance(double lat, double lon);
     bool operator==(const Airport& airport) const;
+    friend std::ostream & operator << (std::ostream &os, Airport &p);
 };
 
 #endif //AEDPROJ2_AIRPORT_H

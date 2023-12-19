@@ -47,3 +47,11 @@ double Airport::getDistance(double lat, double lon) {
 bool Airport::operator==(const Airport &airport) const {
     return airport.code == code;
 }
+
+std::ostream &operator<<(ostream &os, Airport &airport) {
+    os << airport.code + " " + airport.name + " " + airport.city + " " + airport.country + " " + to_string(airport.latitude) + " " +
+            to_string(airport.longitude) + "\n";
+    return os;
+}
+
+
