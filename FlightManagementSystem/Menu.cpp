@@ -8,14 +8,18 @@ void invalid(){
     cout << "Invalid Input, please try again";
 }
 void Menu::run() {
-    cout << "-----------------------------------\n";
-    cout << "\tFlight Management System\n";
-    cout << "-----------------------------------\n";
-    cout << "Select option:\n";
-    cout << "Get Information\n";
-    cout << " - press 1\n";
-    cout << "Quit Manager\n";
-    cout << " - press 2\n";
+    Color_Print("blue", "-----------------------------------\n");
+    Color_Print("blue", "\tFlight Management System\n");
+    Color_Print("blue", "-----------------------------------\n");
+    Color_Print("blue", "Select option:\n");
+    Color_Print("white", "Get Information");
+    Color_Print("cyan", " - press 1\n");
+    Color_Print("white", "Make requests");
+    Color_Print("cyan", " - press 2\n");
+    Color_Print("white", "Settings");
+    Color_Print("cyan", " - press 3\n");
+    Color_Print("red", "Quit Manager");
+    Color_Print("cyan", " - press 4\n");
     string option; cin >> option;
     while(option != "1" && option != "2") {
         invalid();

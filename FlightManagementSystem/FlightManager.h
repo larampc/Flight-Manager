@@ -11,6 +11,7 @@ private:
     Graph<Airport> flights;
     std::unordered_map<std::string, Airline> airlines;
     std::unordered_map<std::string, Airport> airports;
+    std::unordered_map<std::string, vector<Airport*>> cityAirports;
     void load();
 public:
     FlightManager();
