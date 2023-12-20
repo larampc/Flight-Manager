@@ -33,7 +33,7 @@ public:
     int countCitiesFromAirport(std::string airport);
     int countAirportsKStops(std::string airport, int k);
     int minDistanceAirportsbfs(Vertex<Airport>* airportStart, Vertex<Airport>* airportEnd);
-    int diameter();
+    pair<int, vector<Vertex<Airport>*>> diameter();
 };
 
 

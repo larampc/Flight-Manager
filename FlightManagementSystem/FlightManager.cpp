@@ -228,13 +228,22 @@ int FlightManager::minDistanceAirportsbfs(Vertex<Airport>* airportStart, Vertex<
     return res;
 }
 
-int FlightManager::diameter() {
+pair<int, vector<Vertex<Airport>*>> FlightManager::diameter() {
     int max = 0;
+    Vertex<Airport>* start;
+    Vertex<Airport>* end;
     for (Vertex<Airport>* v1: flights.getVertexSet()) {
         for (Vertex<Airport>* v2: flights.getVertexSet()) {
             int dist = minDistanceAirportsbfs(v1, v2);
-            if (max < dist) max = dist;
+            if (max < dist) {
+                max = dist;
+                start = v1;
+                end = v2;
+            }
         }
     }
-    return max;
+    vector<Vertex<Airport>*> vec;
+    vec.push_back(start);
+    vec.push_back(end);
+    return make_pair(max, vec);
 }
