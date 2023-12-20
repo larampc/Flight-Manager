@@ -202,11 +202,39 @@ int FlightManager::countAirportsKStops(std::string airport, int k) {
     return count;
 }
 
-//int minDistanceAirportsbfs() {
-//
-//}
-//
-//int FlightManager::minDistanceAirports(std::string airportStart, std::string airportEnd) {
-//    Vertex<Airport>* StartVertex = flights.findVertex(airports.at(airportStart));
-//    Vertex<Airport>* EndVertex = flights.findVertex(airports.at(airportEnd));
-//}
+int FlightManager::minDistanceAirportsbfs(Vertex<Airport>* airportStart, Vertex<Airport>* airportEnd) {
+    int res = 0;
+    if (airportStart == airportEnd) return 0;
+    queue<pair<int, Vertex<Airport>*>> q;
+    for (auto v : flights.getVertexSet())
+        v->setVisited(false);
+    q.emplace(0, airportStart);
+    airportStart->setVisited(true);
+    while (!q.empty()) {
+        Vertex<Airport>* tocheck = q.front().second;
+        for (Edge<Airport> e: tocheck->getAdj()) {
+            Vertex<Airport>* v = e.getDest();
+            if (!v->isVisited()) {
+                v->setVisited(true);
+                if (v == airportEnd) {
+                    res = q.front().first + 1;
+                    return res;
+                }
+                q.emplace(q.front().first+1, v);
+            }
+        }
+        q.pop();
+    }
+    return res;
+}
+
+int FlightManager::diameter() {
+    int max = 0;
+    for (Vertex<Airport>* v1: flights.getVertexSet()) {
+        for (Vertex<Airport>* v2: flights.getVertexSet()) {
+            int dist = minDistanceAirportsbfs(v1, v2);
+            if (max < dist) max = dist;
+        }
+    }
+    return max;
+}

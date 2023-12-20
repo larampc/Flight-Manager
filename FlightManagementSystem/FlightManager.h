@@ -32,7 +32,8 @@ public:
     int countAirportsFromAirport(std::string airport);
     int countCitiesFromAirport(std::string airport);
     int countAirportsKStops(std::string airport, int k);
-    int minDistanceAirports(std::string airportStart, std::string airportEnd);
+    int minDistanceAirportsbfs(Vertex<Airport>* airportStart, Vertex<Airport>* airportEnd);
+    int diameter();
 };
 
 
