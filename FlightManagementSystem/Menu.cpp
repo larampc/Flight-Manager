@@ -38,7 +38,11 @@ void Menu::run() {
 }
 
 void Menu::makeFlightRequest() {
-
+    pair<int, vector<Vertex<Airport>*>> p = flightManager.diameter();
+    cout << "\n" << p.first;
+    cout << "\n" << p.second[0]->getInfo().getCode();
+    cout << "\n" << p.second[1]->getInfo().getCode();
+    cout << "\n" << flightManager.minDistanceAirportsbfs(p.second[0], p.second[1]);
 }
 
 void Menu::settings() {

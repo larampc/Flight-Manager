@@ -3,6 +3,7 @@
 #include <sstream>
 #include <algorithm>
 #include <unordered_set>
+#include <iostream>
 #include "FlightManager.h"
 
 void FlightManager::addAirport(const Airport& airport) {
@@ -202,6 +203,12 @@ int FlightManager::countAirportsKStops(std::string airport, int k) {
     return count;
 }
 
+int FlightManager::minDistanceAirports(std::string airportStart, std::string airportEnd) {
+    Vertex<Airport>* start = flights.findVertex(airports.at(airportStart));
+    Vertex<Airport>* end = flights.findVertex(airports.at(airportEnd));
+    return minDistanceAirportsbfs(start, end);
+}
+
 int FlightManager::minDistanceAirportsbfs(Vertex<Airport>* airportStart, Vertex<Airport>* airportEnd) {
     int res = 0;
     if (airportStart == airportEnd) return 0;
@@ -233,13 +240,28 @@ pair<int, vector<Vertex<Airport>*>> FlightManager::diameter() {
     Vertex<Airport>* start;
     Vertex<Airport>* end;
     for (Vertex<Airport>* v1: flights.getVertexSet()) {
-        for (Vertex<Airport>* v2: flights.getVertexSet()) {
-            int dist = minDistanceAirportsbfs(v1, v2);
-            if (max < dist) {
-                max = dist;
-                start = v1;
-                end = v2;
+        cout << v1->getInfo().getCode();
+
+        queue<pair<int, Vertex<Airport>*>> q;
+        for (auto v : flights.getVertexSet())
+            v->setVisited(false);
+        q.emplace(0, v1);
+        v1->setVisited(true);
+        while (!q.empty()) {
+            Vertex<Airport>* tocheck = q.front().second;
+            for (Edge<Airport> e: tocheck->getAdj()) {
+                Vertex<Airport>* v = e.getDest();
+                if (!v->isVisited()) {
+                    v->setVisited(true);
+                    if (q.front().first+1 > max) {
+                        max = q.front().first+1;
+                        start = v1;
+                        end = v;
+                    }
+                    q.emplace(q.front().first+1, v);
+                }
             }
+            q.pop();
         }
     }
     vector<Vertex<Airport>*> vec;
