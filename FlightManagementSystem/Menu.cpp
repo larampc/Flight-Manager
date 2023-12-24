@@ -30,6 +30,10 @@ void Menu::run() {
     switch (option[0]) {
         case '1':
             makeFlightRequest();
+            break;
+        case '2':
+            getDiameter();
+            break;
         case '3': {
             settings();
             break;
@@ -65,4 +69,9 @@ void Menu::settings() {
         else Color_Print("cyan", "Color mode disabled\n");
     }
     run();
+}
+
+void Menu::getDiameter() {
+    cout << flightManager.diameter().first;
+
 }

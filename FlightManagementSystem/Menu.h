@@ -10,6 +10,7 @@ public:
     void run();
     void makeFlightRequest();
     void settings();
+    void getDiameter();
 };
 
 

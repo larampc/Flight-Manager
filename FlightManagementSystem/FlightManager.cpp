@@ -240,8 +240,6 @@ pair<int, vector<Vertex<Airport>*>> FlightManager::diameter() {
     Vertex<Airport>* start;
     Vertex<Airport>* end;
     for (Vertex<Airport>* v1: flights.getVertexSet()) {
-        cout << v1->getInfo().getCode();
-
         queue<pair<int, Vertex<Airport>*>> q;
         for (auto v : flights.getVertexSet())
             v->setVisited(false);
@@ -269,3 +267,53 @@ pair<int, vector<Vertex<Airport>*>> FlightManager::diameter() {
     vec.push_back(end);
     return make_pair(max, vec);
 }
+
+bool inStack(stack<Airport> s, Airport i) {
+    while (!s.empty()) {
+        if (s.top() == i) return true;
+        s.pop();
+    }
+    return false;
+}
+void dfs_art(Graph<Airport>* g, Vertex<Airport> *v, stack<Airport> &s, vector<Airport> &l, int &i){
+    v->setVisited(true);
+    v->setLow(i);
+    v->setNum(i);
+    s.push(v->getInfo());
+    int child = 0;
+    for (Edge<Airport> e: v->getAdj()) {
+        if (e.getDest()->getNum() == 0) {
+            dfs_art(g, e.getDest(), s, l, ++i);
+            v->setLow(min(e.getDest()->getLow(), v->getLow()));
+            if (e.getDest()->getLow() >= v->getNum() && v->getLow() != v->getNum()) {
+                l.push_back(v->getInfo());
+            }
+            child++;
+        }
+        else if (inStack(s, e.getDest()->getInfo())){
+            v->setLow(min(e.getDest()->getNum(), v->getLow()));
+        }
+    }
+    if (v->getLow() == v->getNum() && child > 1) {
+        l.push_back(v->getInfo());
+    }
+}
+
+vector<Airport> FlightManager::essentialAirports() {
+    vector<Airport> res;
+    for (Vertex<Airport>* v: flights.getVertexSet()) {
+        v->setVisited(false);
+        v->setLow(0);
+        v->setNum(0);
+    }
+    stack<Airport> s;
+    int ii = 1;
+    for (Vertex<Airport>* v: flights.getVertexSet()) {
+        if (!v->isVisited()) {
+            dfs_art(&flights, v, s, res, ii);
+        }
+    }
+    return res;
+}
+
+
