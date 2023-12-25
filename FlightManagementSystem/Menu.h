@@ -8,7 +8,17 @@ private:
     FlightManager flightManager;
 public:
     void run();
-    void makeFlightRequest();
+    void getInformation();
+    void getFlightNumbers();
+    void getFlightsAirport();
+    void getFlightsCity();
+    void getFlightsAirline();
+    void getDestinations();
+    void getCountriesCity();
+    void getCountriesAirport();
+    void getAirportsAirport();
+    void getCitiesAirport();
+    void getAirlinesAirport();
     void settings();
     void getDiameter();
 };

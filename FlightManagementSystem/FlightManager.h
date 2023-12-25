@@ -21,6 +21,7 @@ public:
     Airport getAirport(std::string code);
     std::unordered_map<std::string, Airline> getAirlines();
     std::unordered_map<std::string, Airport> getAirports();
+    std::unordered_map<std::string, vector<Airport*>> getCityAirports();
     int countFlightsPerAirline(std::string code) const;
     int countFlightsPerCity(std::string city) const;
     int countAirports();
@@ -32,6 +33,8 @@ public:
     int countAirportsFromAirport(std::string airport);
     int countCitiesFromAirport(std::string airport);
     int countAirportsKStops(std::string airport, int k);
+    int countCountriesKStops(std::string airport, int k);
+    int countCitiesKStops(std::string airport, int k);
     int minDistanceAirportsbfs(Vertex<Airport>* airportStart, Vertex<Airport>* airportEnd);
     int minDistanceAirports(std::string airportStart, std::string airportEnd);
     pair<int, vector<Vertex<Airport>*>> diameter();

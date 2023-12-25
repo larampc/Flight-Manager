@@ -180,7 +180,6 @@ int FlightManager::countAirportsKStops(std::string airport, int k) {
     }
     Vertex<Airport>* start = flights.findVertex(airports.at(airport));
     queue<pair<int, Vertex<Airport>*>> tovisit;
-    unordered_set<std::string> airportsVisited;
     int count = 0;
     start->setVisited(true);
     tovisit.emplace(0,start);
@@ -315,5 +314,70 @@ vector<Airport> FlightManager::essentialAirports() {
     }
     return res;
 }
+
+std::unordered_map<std::string, vector<Airport *>> FlightManager::getCityAirports() {
+    return cityAirports;
+}
+
+int FlightManager::countCountriesKStops(std::string airport, int k) {
+    for (Vertex<Airport>* v: flights.getVertexSet()) {
+        v->setVisited(false);
+    }
+    Vertex<Airport>* start = flights.findVertex(airports.at(airport));
+    queue<pair<int, Vertex<Airport>*>> tovisit;
+    unordered_set<std::string> countriesVisited;
+    start->setVisited(true);
+    tovisit.emplace(0,start);
+    if (k == 0) {
+        return 0;
+    }
+    while (!tovisit.empty()) {
+        Vertex<Airport>* tocheck = tovisit.front().second;
+        for (Edge<Airport> e: tocheck->getAdj()) {
+            Vertex<Airport>* v = e.getDest();
+            if (!v->isVisited()) {
+                v->setVisited(true);
+                if (tovisit.front().first+1>k) return countriesVisited.size();
+                if (!countriesVisited.count(v->getInfo().getCountry())) {
+                    countriesVisited.insert(v->getInfo().getCountry());
+                }
+                tovisit.emplace(tovisit.front().first+1, v);
+            }
+        }
+        tovisit.pop();
+    }
+    return countriesVisited.size();
+}
+
+int FlightManager::countCitiesKStops(std::string airport, int k) {
+    for (Vertex<Airport>* v: flights.getVertexSet()) {
+        v->setVisited(false);
+    }
+    Vertex<Airport>* start = flights.findVertex(airports.at(airport));
+    queue<pair<int, Vertex<Airport>*>> tovisit;
+    unordered_set<std::string> citiesVisited;
+    start->setVisited(true);
+    tovisit.emplace(0,start);
+    if (k == 0) {
+        return 0;
+    }
+    while (!tovisit.empty()) {
+        Vertex<Airport>* tocheck = tovisit.front().second;
+        for (Edge<Airport> e: tocheck->getAdj()) {
+            Vertex<Airport>* v = e.getDest();
+            if (!v->isVisited()) {
+                v->setVisited(true);
+                if (tovisit.front().first+1>k) return citiesVisited.size();
+                if (!citiesVisited.count(v->getInfo().getCity())) {
+                    citiesVisited.insert(v->getInfo().getCity());
+                }
+                tovisit.emplace(tovisit.front().first+1, v);
+            }
+        }
+        tovisit.pop();
+    }
+    return citiesVisited.size();
+}
+
 
 
