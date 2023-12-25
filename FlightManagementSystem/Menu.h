@@ -23,6 +23,8 @@ public:
     void getDiameter();
     void getEssentialAirports();
     void getKAirportTraffic();
+    void getRequest();
+    void requestFromAirportCodeToAirportCode();
 };
 
 

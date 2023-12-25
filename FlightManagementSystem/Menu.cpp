@@ -32,7 +32,7 @@ void Menu::run() {
             getInformation();
             break;
         case '2':
-//            getDiameter();
+            getRequest();
             break;
         case '3':
             settings();
@@ -382,4 +382,46 @@ void Menu::getKAirportTraffic() {
     int k; cin >> k;
     Color_Print("white", "Airport: ");
     Color_Print("cyan", flightManager.kAirportWithGreaterTraffic(k).getName() + "\n");
+}
+
+void Menu::getRequest() {
+    Color_Print("blue", "Source location:\n");
+    Color_Print("white", "From an airport code");
+    Color_Print("cyan", " - write 1 followed by airport code\n");
+    Color_Print("white", "From an airport name");
+    Color_Print("cyan", " - write 2 followed by airport name\n");
+    Color_Print("white", "From a city");
+    Color_Print("cyan", " - write 3 followed by city name \n");
+    Color_Print("white", "Geographical coordinates");
+    Color_Print("cyan", " - write 4 followed by the latitude and longitude\n");
+    Color_Print("red", "Cancel");
+    Color_Print("cyan", " - press 5\n");
+    string option; cin >> option;
+    string source; cin >> source;
+    while(option != "1" && option != "2" && option != "3" && option != "4" && option != "5") {
+        invalid();
+        cin >> option;
+    }
+    Color_Print("blue", "Destination location:\n");
+    Color_Print("white", "From an airport code");
+    Color_Print("cyan", " - write 1 followed by airport code\n");
+    Color_Print("white", "From an airport name");
+    Color_Print("cyan", " - write 2 followed by airport name\n");
+    Color_Print("white", "From a city");
+    Color_Print("cyan", " - write 3 followed by city name \n");
+    Color_Print("white", "Geographical coordinates");
+    Color_Print("cyan", " - write 4 followed by the latitude and longitude\n");
+    Color_Print("red", "Cancel");
+    Color_Print("cyan", " - press 5\n");
+    string option2; cin >> option2;
+    string source2; cin >> source2;
+    while(option2 != "1" && option2 != "2" && option2 != "3" && option2 != "4" && option2 != "5") {
+        invalid();
+        cin >> option2;
+    }
+    if (option == "1" && option2 == "1") requestFromAirportCodeToAirportCode();
+}
+
+void Menu::requestFromAirportCodeToAirportCode() {
+
 }

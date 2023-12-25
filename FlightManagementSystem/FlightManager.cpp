@@ -3,7 +3,6 @@
 #include <sstream>
 #include <algorithm>
 #include <unordered_set>
-#include <iostream>
 #include "FlightManager.h"
 
 void FlightManager::addAirport(const Airport& airport) {
@@ -231,7 +230,6 @@ int FlightManager::minDistanceAirportsbfs(Vertex<Airport>* airportStart, Vertex<
         }
         q.pop();
     }
-    return res;
 }
 
 pair<int, vector<pair<Vertex<Airport>*, Vertex<Airport>*>>> FlightManager::diameter() {
@@ -390,7 +388,7 @@ Airport FlightManager::kAirportWithGreaterTraffic(int k) {
     for (auto a: airports) {
         airportTraffic.push_back(make_pair(countFlightsFromAirport(a.first), a.second));
     }
-    sort(airportTraffic.begin(),airportTraffic.end(), [](pair<int, Airport> p1, pair<int, Airport> p2) ->bool {return p1.first < p2.first;});
+    sort(airportTraffic.begin(),airportTraffic.end(), [](pair<int, Airport> p1, pair<int, Airport> p2) ->bool {return p1.first > p2.first;});
     return airportTraffic.at(k).second;
 }
 
