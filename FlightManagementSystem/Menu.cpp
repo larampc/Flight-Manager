@@ -108,9 +108,8 @@ void Menu::getInformation() {
         case '5':
             Color_Print("white", "Maximum trip: ");
             break;
-        case '8':
-            run();
     }
+    run();
 }
 
 void Menu::getFlightNumbers() {
@@ -172,7 +171,8 @@ void Menu::getFlightsAirport() {
         case '2':
             Color_Print("cyan", "Airport code: \n");
             cin >> airportCode;
-            cout << flightManager.countFlightsFromAirport(airportCode) << endl;
+            Color_Print("white", "Number of flights: ");
+            Color_Print("cyan", to_string(flightManager.countFlightsFromAirport(airportCode)));
             break;
         case '3':
             run();
@@ -202,7 +202,8 @@ void Menu::getFlightsCity() {
         case '2':
             Color_Print("cyan", "City name: \n");
             cin >> cityName;
-            cout << flightManager.countFlightsPerCity(cityName) << endl;
+            Color_Print("white", "Number of flights: ");
+            Color_Print("cyan", to_string(flightManager.countFlightsPerCity(cityName)));
             break;
         case '3':
             run();
@@ -232,7 +233,8 @@ void Menu::getFlightsAirline() {
         case '2':
             Color_Print("cyan", "Airline code: \n");
             cin >> airlineCode;
-            cout << flightManager.countFlightsPerAirline(airlineCode) << endl;
+            Color_Print("white", "Number of flights: ");
+            Color_Print("cyan", to_string(flightManager.countFlightsPerAirline(airlineCode)));
             break;
         case '3':
             run();
