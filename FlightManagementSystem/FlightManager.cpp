@@ -290,7 +290,7 @@ void dfs_art(Graph<Airport>* g, Vertex<Airport> *v, stack<Airport> &s, vector<Ai
             dfs_art(g, e.getDest(), s, l, ++i);
             v->setLow(min(e.getDest()->getLow(), v->getLow()));
             if (e.getDest()->getLow() >= v->getNum() && v->getLow() != v->getNum()) {
-                l.push_back(v->getInfo());
+                if (!count(l.begin(), l.end(), v->getInfo())) l.push_back(v->getInfo());
             }
             child++;
         }
@@ -317,6 +317,7 @@ vector<Airport> FlightManager::essentialAirports() {
             dfs_art(&flights, v, s, res, ii);
         }
     }
+    sort(res.begin(), res.end(), [](Airport a, Airport b)->bool {return a.getCode()<b.getCode();});
     return res;
 }
 
@@ -382,6 +383,15 @@ int FlightManager::countCitiesKStops(std::string airport, int k) {
         tovisit.pop();
     }
     return citiesVisited.size();
+}
+
+Airport FlightManager::kAirportWithGreaterTraffic(int k) {
+    vector<pair<int, Airport>> airportTraffic;
+    for (auto a: airports) {
+        airportTraffic.push_back(make_pair(countFlightsFromAirport(a.first), a.second));
+    }
+    sort(airportTraffic.begin(),airportTraffic.end(), [](pair<int, Airport> p1, pair<int, Airport> p2) ->bool {return p1.first < p2.first;});
+    return airportTraffic.at(k).second;
 }
 
 

@@ -21,6 +21,8 @@ public:
     void getAirlinesAirport();
     void settings();
     void getDiameter();
+    void getEssentialAirports();
+    void getKAirportTraffic();
 };
 
 

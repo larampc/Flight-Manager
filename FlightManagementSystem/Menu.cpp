@@ -32,7 +32,7 @@ void Menu::run() {
             getInformation();
             break;
         case '2':
-            getDiameter();
+//            getDiameter();
             break;
         case '3':
             settings();
@@ -63,14 +63,7 @@ void Menu::settings() {
     run();
 }
 
-void Menu::getDiameter() {
-    pair<int, vector<pair<Vertex<Airport>*, Vertex<Airport>*>>> temp = flightManager.diameter();
-//    cout << flightManager.diameter().first;                                                              !!! TEMPORARY COUTS !!!
-    cout << temp.first << endl;                                                                         // !!! TEMPORARY COUTS !!!
-    for (auto pair: temp.second) {                                                             // !!! TEMPORARY COUTS !!!
-        cout << pair.first->getInfo().getCode() << " - " << pair.second->getInfo().getCode() << endl;  // !!! TEMPORARY COUTS !!!
-    }                                                                                                  // !!! TEMPORARY COUTS !!!
-}
+
 
 void Menu::getInformation() {
     Color_Print("blue", "Select option:\n");
@@ -86,7 +79,7 @@ void Menu::getInformation() {
     Color_Print("cyan", " - press 5\n");
     Color_Print("white", "Airport with the greatest air traffic capacity");
     Color_Print("cyan", " - press 6\n");
-    Color_Print("white", "Essential Airport's to the network’s circulation capability");
+    Color_Print("white", "Essential Airport's to the network's circulation capability");
     Color_Print("cyan", " - press 7\n");
     Color_Print("red", "Cancel");
     Color_Print("cyan", " - press 8\n");
@@ -110,8 +103,14 @@ void Menu::getInformation() {
             getAirlinesAirport();
             break;
         case '5':
-            Color_Print("white", "Maximum trip: ");
+            Color_Print("white", "Maximum trip stops: ");
+            getDiameter();
             break;
+        case '6':
+            getKAirportTraffic();
+            break;
+        case '7':
+            getEssentialAirports();
     }
     run();
 }
@@ -363,3 +362,24 @@ void Menu::getAirlinesAirport() {
     Color_Print("cyan", to_string(flightManager.countAirlinesFromAirport(airportCode)));
 }
 
+void Menu::getDiameter() {
+    pair<int, vector<pair<Vertex<Airport>*, Vertex<Airport>*>>> temp = flightManager.diameter();
+    cout << temp.first << endl;                                                                         // !!! TEMPORARY COUTS !!!
+    for (auto pair: temp.second) {                                                             // !!! TEMPORARY COUTS !!!
+        cout << pair.first->getInfo().getCode() << " - " << pair.second->getInfo().getCode() << endl;  // !!! TEMPORARY COUTS !!!
+    }                                                                                                  // !!! TEMPORARY COUTS !!!
+}
+
+void Menu::getEssentialAirports() {
+    for (Airport a: flightManager.essentialAirports()) {
+        Color_Print("cyan", a.getCode() + " ");
+        Color_Print("white", a.getName() + "\n");
+    }
+}
+
+void Menu::getKAirportTraffic() {
+    Color_Print("white", "K order: ");
+    int k; cin >> k;
+    Color_Print("white", "Airport: ");
+    Color_Print("cyan", flightManager.kAirportWithGreaterTraffic(k).getName() + "\n");
+}
