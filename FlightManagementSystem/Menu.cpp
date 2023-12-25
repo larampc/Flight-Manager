@@ -64,8 +64,12 @@ void Menu::settings() {
 }
 
 void Menu::getDiameter() {
-    cout << flightManager.diameter().first;
-
+    pair<int, vector<pair<Vertex<Airport>*, Vertex<Airport>*>>> temp = flightManager.diameter();
+//    cout << flightManager.diameter().first;                                                              !!! TEMPORARY COUTS !!!
+    cout << temp.first << endl;                                                                         // !!! TEMPORARY COUTS !!!
+    for (auto pair: temp.second) {                                                             // !!! TEMPORARY COUTS !!!
+        cout << pair.first->getInfo().getCode() << " - " << pair.second->getInfo().getCode() << endl;  // !!! TEMPORARY COUTS !!!
+    }                                                                                                  // !!! TEMPORARY COUTS !!!
 }
 
 void Menu::getInformation() {

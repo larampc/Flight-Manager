@@ -234,10 +234,12 @@ int FlightManager::minDistanceAirportsbfs(Vertex<Airport>* airportStart, Vertex<
     return res;
 }
 
-pair<int, vector<Vertex<Airport>*>> FlightManager::diameter() {
+pair<int, vector<pair<Vertex<Airport>*, Vertex<Airport>*>>> FlightManager::diameter() {
     int max = 0;
     Vertex<Airport>* start;
     Vertex<Airport>* end;
+    vector<pair<Vertex<Airport>*, Vertex<Airport>*>> pairs;
+
     for (Vertex<Airport>* v1: flights.getVertexSet()) {
         queue<pair<int, Vertex<Airport>*>> q;
         for (auto v : flights.getVertexSet())
@@ -254,6 +256,12 @@ pair<int, vector<Vertex<Airport>*>> FlightManager::diameter() {
                         max = q.front().first+1;
                         start = v1;
                         end = v;
+                        pairs.clear();
+                        pairs.push_back(make_pair(start, end));
+                    } else if (q.front().first+1 == max) {
+                        start = v1;
+                        end = v;
+                        pairs.push_back(make_pair(start, end));
                     }
                     q.emplace(q.front().first+1, v);
                 }
@@ -261,10 +269,7 @@ pair<int, vector<Vertex<Airport>*>> FlightManager::diameter() {
             q.pop();
         }
     }
-    vector<Vertex<Airport>*> vec;
-    vec.push_back(start);
-    vec.push_back(end);
-    return make_pair(max, vec);
+    return make_pair(max, pairs);
 }
 
 bool inStack(stack<Airport> s, Airport i) {
